@@ -1,15 +1,16 @@
-import './elements/word';
+import './elements/board';
 
+import {Board, WORDS} from './elements/board';
 import {LitElement, css} from 'lit';
-import {customElement} from 'lit/decorators.js';
+import {customElement, query} from 'lit/decorators.js';
 import {html} from 'lit-html';
-
-const LIST1 = ['at', 'I', 'am', 'a', 'the'];
-const LIST2 = ['look', 'in', 'my', 'can', 'do'];
-const WORDS = [LIST1, LIST2];
 
 @customElement('e-container')
 class EContainer extends LitElement {
+  lists = new Map<string, boolean>([...WORDS.keys()].map((k) => [k, true]));
+
+  @query('e-board') board!: Board;
+
   static get styles() {
     return css` 
       :host {
@@ -19,15 +20,29 @@ class EContainer extends LitElement {
       }
     `;
   }
-  renderWords() {
-    return WORDS.flat().map((word) =>
-      html`<e-word>${word}</e-word>`,
-    );
+
+  renderCheck(key: string) {
+    return html`
+      <label>
+        <li>
+          <input
+              type="checkbox"
+              @change=${() => {
+    this.lists.set(key, !this.lists.get(key));
+    this.board.requestUpdate();
+  }}
+              ?checked=${this.lists.get(key)}>
+          ${key}
+        </li>
+      </label>`;
   }
 
   override render() {
     return html`
-      ${this.renderWords()}
+      <ul>  
+        ${[...WORDS.keys()].map((key) => this.renderCheck(key))}
+      </ul>
+      <e-board .options=${this.lists}><e-board>
     `;
   }
 }
