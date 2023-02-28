@@ -1,0 +1,3 @@
+[submodule "deal"]
+	path = deal
+	url = https://github.com/tapted/deal.git

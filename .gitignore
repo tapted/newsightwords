@@ -1,0 +1,8 @@
+appengine-generated/
+node_modules/
+dist/
+public/js
+public/service-worker.js
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
