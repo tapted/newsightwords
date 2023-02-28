@@ -1,11 +1,16 @@
 import '@material/mwc-button';
 import '@material/mwc-snackbar';
 import './elements/banner';
+import './elements/word';
 
 import {LitElement, css} from 'lit';
 import {customElement, query} from 'lit/decorators.js';
 import {Snackbar} from '@material/mwc-snackbar';
 import {html} from 'lit-html';
+
+const LIST1 = ['at', 'I', 'am', 'a', 'the'];
+const LIST2 = ['look', 'in', 'my', 'can', 'do'];
+const WORDS = [LIST1, LIST2];
 
 @customElement('e-container')
 class EContainer extends LitElement {
@@ -14,15 +19,9 @@ class EContainer extends LitElement {
   static get styles() {
     return css` 
       :host {
+        padding: 20px;
         display: flex;
-        flex-direction: row;
-        height: 90vh;
-        overflow-x: scroll;
-        overflow-y: hidden;
-        width: 100vw;
-      }
-      :host::-webkit-scrollbar {
-        display: none;
+        flex-wrap: wrap;
       }
     `;
   }
@@ -31,14 +30,16 @@ class EContainer extends LitElement {
       console.log('Snackbar action');
     }
   }
+
+  renderWords() {
+    return WORDS.flat().map((word) =>
+      html`<e-word>${word}</e-word>`,
+    );
+  }
+
   override render() {
     return html`
-      <e-banner></e-banner>
-      &middot;
-      <mwc-button
-          @click=${() => this.snackbar.show()}>
-        Yourstuff
-      </mwc-button>
+      ${this.renderWords()}
       <mwc-snackbar
           timeoutMs="-1"
           @MDCSnackbar:closing=${this.onSnackbarClosing}>
