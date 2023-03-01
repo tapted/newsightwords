@@ -72,6 +72,7 @@ export class Board extends LitElement {
     shuffle(this.words);
     for (const tile of this.renderRoot.querySelectorAll('e-word')) {
       tile.flip = false;
+      tile.match = false;
     }
     this.requestUpdate();
   }
