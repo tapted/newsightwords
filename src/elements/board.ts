@@ -55,6 +55,12 @@ export class Board extends LitElement {
 
   pickWords() {
     this.words.length = 0;
+    if (!this.wordCount || this.wordCount < 1) {
+      this.wordCount = 1;
+    }
+    if (this.wordCount > 200) {
+      this.wordCount = 200;
+    }
     while (this.words.length < this.wordCount) {
       for (const k of WORDS.keys()) {
         if (!this.options.get(k)) {
