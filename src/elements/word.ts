@@ -2,15 +2,45 @@ import {LitElement, css} from 'lit';
 import {customElement, property} from 'lit/decorators.js';
 import {html} from 'lit-html';
 
+function unflip(tiles: EWord[]) {
+  for (const t of tiles) {
+    t.flip = false;
+  }
+}
+
 @customElement('e-word')
 class EWord extends LitElement {
   @property({type: Boolean, reflect: true}) flip = false;
+  @property({type: Boolean, reflect: true}) match = false;
 
   constructor() {
     super();
-    this.addEventListener('pointerdown', () => {
+    this.addEventListener('pointerdown', async () => {
+      if (this.match) {
+        return;
+      }
       this.flip = !this.flip;
+      await this.updateComplete;
+      this.markMatches();
     });
+  }
+
+  markMatches() {
+    const flipped = [...this.parentElement!.querySelectorAll('e-word[flip]')!] as EWord[];
+    if (flipped.length < 2) {
+      return;
+    }
+    const word = flipped[0].innerText;
+    for (let i = 1; i < flipped.length; ++i) {
+      if (flipped[i].innerText !== word) {
+        setTimeout(() => unflip(flipped), 500);
+        return;
+      }
+    }
+    for (const tile of flipped) {
+      tile.match = true;
+      tile.flip = false;
+    }
   }
 
   static get styles() {
@@ -45,19 +75,20 @@ class EWord extends LitElement {
         font-weight: unset;
         text-align: center;
       }
-      /* front side bg is green gradient */
-      .front {
-        background-image: linear-gradient(to right bottom, #2ecc71, #229955);
-      }
       /* back side bg is orange gradient */ 
       .back {
         background-image: linear-gradient(to right bottom, #f1c40f, #e67e22);
         transform: rotateY(180deg);
       }
-      :host([flip]) .front {
+      /* front side bg is green gradient */
+      .front,
+      :host([match]) .back {
+        background-image: linear-gradient(to right bottom, #2ecc71, #229955);
+      }
+      :host(:where([flip],[match])) .front {
         transform: rotateY(-180deg);
       }
-      :host([flip]) .back {
+      :host(:where([flip],[match])) .back {
         transform: rotateY(0deg);
       }
     `;
