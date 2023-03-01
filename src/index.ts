@@ -21,6 +21,10 @@ class EContainer extends LitElement {
     `;
   }
 
+  override firstUpdated() {
+    this.board.pickWords();
+  }
+
   renderCheck(key: string) {
     return html`
       <label>
@@ -29,7 +33,7 @@ class EContainer extends LitElement {
               type="checkbox"
               @change=${() => {
     this.lists.set(key, !this.lists.get(key));
-    this.board.requestUpdate();
+    this.board.pickWords();
   }}
               ?checked=${this.lists.get(key)}>
           ${key}
