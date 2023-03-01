@@ -18,12 +18,18 @@ export class Board extends LitElement {
   static get styles() {
     return css` 
       :host {
-        padding: 20px;
+        padding: 16px;
+      }
+      input {
+        width: 280px;
+      }
+      .tiles {
         display: flex;
         flex-wrap: wrap;
       }
     `;
   }
+
   renderWords(key: string) {
     if (!this.options.get(key)) {
       return ``;
@@ -33,9 +39,22 @@ export class Board extends LitElement {
     );
   }
 
+  onTileSizeChange(e: InputEvent) {
+    const value = (e.target as HTMLInputElement).value;
+    this.style.setProperty('--tile-size', `${value}px`);
+  }
+
   override render() {
     return html`
-      ${[...WORDS.keys()].map((key) => this.renderWords(key))}
+      <label>
+        Tile Size
+        <input type="range" min="60" max="200" value="160" step="1"
+            @input=${this.onTileSizeChange}
+        >
+      </label>
+      <div class="tiles">
+        ${[...WORDS.keys()].map((key) => this.renderWords(key))}
+      </div>
     `;
   }
 }

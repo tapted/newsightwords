@@ -16,12 +16,12 @@ class EWord extends LitElement {
   static get styles() {
     return css`
       :host {
-        padding: 20px;
+        padding: 8px;
         position: relative;
       }
       :host, .front, .back {
-        height: 200px;
-        width: 200px;
+        height: var(--tile-size, 180px);
+        width: var(--tile-size, 180px);
       }
       .front, .back {
         backface-visibility: hidden;
@@ -33,11 +33,17 @@ class EWord extends LitElement {
         justify-content: center;
         left: 0;
         overflow: hidden;
-        padding: 2rem;
+        padding: 8px;
         position: absolute;
         text-align: center;
         top: 0;
         transition: transform .3s ease;
+      }
+      h2 {
+        font-family: 'Edu NSW ACT Foundation', cursive;
+        font-size: calc(var(--tile-size, 180px) * 0.5);
+        font-weight: unset;
+        text-align: center;
       }
       /* front side bg is green gradient */
       .front {
@@ -46,15 +52,6 @@ class EWord extends LitElement {
       /* back side bg is orange gradient */ 
       .back {
         background-image: linear-gradient(to right bottom, #f1c40f, #e67e22);
-      }
-      
-      h2 {
-        font-family: 'Edu NSW ACT Foundation', cursive;
-        font-size: 60pt;
-        font-weight: unset;
-        text-align: center;
-      }
-      .back {
         transform: rotateY(180deg);
       }
       :host([flip]) .front {
