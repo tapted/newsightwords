@@ -26,3 +26,13 @@ registerRoute(
     new RegExp('https://cdn.jsdelivr.net/.*'),
     new StaleWhileRevalidate({}),
 );
+
+registerRoute(
+    new RegExp('https://fonts.googleapis.com/.*'),
+    new StaleWhileRevalidate({}),
+);
+
+registerRoute(
+    new RegExp('https://fonts.gstatic.com/.*'),
+    new StaleWhileRevalidate({}),
+);

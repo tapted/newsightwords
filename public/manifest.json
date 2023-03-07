@@ -1,5 +1,5 @@
 {
-  "name": "Deal",
+  "name": "New Sight Words",
   "icons": [
     {
       "src": "./icons/icon-16x16.png",
@@ -67,9 +67,11 @@
       "sizes": "512x512"
     }
   ],
-  "short_name": "Deal",
+  "short_name": "Sight Words",
   "theme_color": "#2196f3",
+  "display": "standalone",
   "background_color": "#2196f3",
   "orientation": "portrait",
-  "start_url": "index.html"
+  "start_url": "index.html",
+  "id": "/index.html"
 }
