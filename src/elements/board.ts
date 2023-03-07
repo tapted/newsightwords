@@ -1,7 +1,7 @@
 import './word';
 
 import {LitElement, css} from 'lit';
-import {customElement, property, state} from 'lit/decorators.js';
+import {customElement, property, query, state} from 'lit/decorators.js';
 import {html} from 'lit-html';
 
 const LIST1 = ['at', 'I', 'am', 'a', 'the'];
@@ -12,6 +12,7 @@ export const WORDS = new Map<string, string[]>([
   ['List 1', LIST1],
   ['List 2', LIST2],
   ['List 3', LIST3],
+  ['Custom', []],
 ]);
 
 function shuffle(array: string[]) {
@@ -36,6 +37,8 @@ function shuffle(array: string[]) {
 export class Board extends LitElement {
   @property({attribute: false}) options = new Map<string, boolean>();
   @state() wordCount = 10;
+  @query('#custom-words') customWords!: HTMLInputElement;
+
   words: string[] = [];
 
   static get styles() {
@@ -92,6 +95,17 @@ export class Board extends LitElement {
     );
   }
 
+  onCustomWordsChange() {
+    const words = this.customWords.value.split(',').map((w) => w.trim());
+    WORDS.set('Custom', words);
+    this.pickWords();
+  }
+
+  useAnimals() {
+    this.customWords.value = '🐕️, 🐈‍, 🐁, 🐄, 🐘';
+    this.onCustomWordsChange();
+  }
+
   onTileSizeChange(e: InputEvent) {
     const value = (e.target as HTMLInputElement).value;
     this.style.setProperty('--tile-size', `${value}px`);
@@ -104,6 +118,15 @@ export class Board extends LitElement {
 
   override render() {
     return html`
+      <div>
+        <label>
+          Custom Words
+          <input id="custom-words" type="text" placeholder="one, two, 🐶"
+              @change=${this.onCustomWordsChange}
+          >
+        </label>
+        <button @click=${this.useAnimals}>Animals</button>
+      </div>
       <label>
         Tile Size
         <input type="range" min="60" max="200" value="160" step="1"
