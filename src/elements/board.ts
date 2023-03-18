@@ -48,8 +48,8 @@ export class Board extends LitElement {
       :host {
         display: flex;
         flex-direction: column;
-        gap: 8px;
-        padding: 16px;
+        gap: 2px;
+        padding: 0 0 0 16px;
       }
       input[type="range"] {
         width: 280px;
@@ -57,8 +57,26 @@ export class Board extends LitElement {
       .tiles {
         display: flex;
         flex-wrap: wrap;
+        padding-top: 8px;
+      }
+      .custom-words-row {
+        display: flex;
+        padding: 0 16px 0 0;
+      }
+      .custom-words-row label {
+        display: flex;
+        flex: 1;
+        gap: 4px;
+      }
+      .custom-words-row input {
+        flex: 1;
       }
     `;
+  }
+
+  constructor() {
+    super();
+    this.style.setProperty('--tile-size', `min(130px, 20vw)`);
   }
 
   pickWords() {
@@ -98,19 +116,19 @@ export class Board extends LitElement {
   }
 
   onCustomWordsChange() {
-    const words = this.customWords.value.split(',').map((w) => w.trim());
+    const words = this.customWords.value.split(/(\s+)/).filter((e) => e.trim().length > 0);
     WORDS.set('Custom', words);
     this.pickWords();
   }
 
   useAnimals() {
-    this.customWords.value = '🐕️, 🐈‍, 🐁, 🐄, 🐘';
+    this.customWords.value = '🐕️ 🐈‍ 🐁 🐄 🐘';
     this.onCustomWordsChange();
   }
 
   onTileSizeChange(e: InputEvent) {
     const value = (e.target as HTMLInputElement).value;
-    this.style.setProperty('--tile-size', `${value}px`);
+    this.style.setProperty('--tile-size', `min(${value}px, 0.15*${value}vw)`);
   }
 
   onTileCountChange(e: InputEvent) {
@@ -120,23 +138,23 @@ export class Board extends LitElement {
 
   override render() {
     return html`
-      <div>
+      <div class="custom-words-row">
         <label>
-          Custom Words
-          <input id="custom-words" type="text" placeholder="one, two, 🐶"
+          Custom Words:
+          <input id="custom-words" type="text" placeholder="one two 🐶" size="10"
               @change=${this.onCustomWordsChange}
           >
         </label>
         <button @click=${this.useAnimals}>Animals</button>
       </div>
       <label>
-        Tile Size
-        <input type="range" min="60" max="200" value="160" step="1"
+        Tile Size:
+        <input type="range" min="60" max="200" value="130" step="1"
             @input=${this.onTileSizeChange}
         >
       </label>
       <label>
-        Word Count
+        Word Count:
         <input type="number" min="5" max="200" step="1"
             value=${this.wordCount}
             @input=${this.onTileCountChange}
