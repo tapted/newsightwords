@@ -63,13 +63,17 @@ export class Board extends LitElement {
         display: flex;
         padding: 0 16px 0 0;
       }
-      .custom-words-row label {
+      .label-row {
         display: flex;
         flex: 1;
         gap: 4px;
+        padding: 0 16px 0 0;
       }
-      .custom-words-row input {
+      .label-row input {
         flex: 1;
+      }
+      #word-count {
+        max-width: 40px;
       }
     `;
   }
@@ -139,7 +143,7 @@ export class Board extends LitElement {
   override render() {
     return html`
       <div class="custom-words-row">
-        <label>
+        <label class="label-row">
           Custom Words:
           <input id="custom-words" type="text" placeholder="one two 🐶" size="10"
               @change=${this.onCustomWordsChange}
@@ -147,16 +151,19 @@ export class Board extends LitElement {
         </label>
         <button @click=${this.useAnimals}>Animals</button>
       </div>
-      <label>
+      <label class="label-row">
         Tile Size:
         <input type="range" min="60" max="200" value="130" step="1"
             @input=${this.onTileSizeChange}
         >
       </label>
-      <label>
+      <label class="label-row">
         Word Count:
-        <input type="number" min="5" max="200" step="1"
+        <input id="word-count" type="number" min="2" max="200" step="1" size="3"
             value=${this.wordCount}
+            @input=${this.onTileCountChange}
+        >
+        <input type="range" min="2" max="200" step="1" value="10"
             @input=${this.onTileCountChange}
         >
       </label>
