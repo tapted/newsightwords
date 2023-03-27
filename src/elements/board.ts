@@ -9,6 +9,7 @@ const LIST2 = ['look', 'in', 'my', 'can', 'do'];
 const LIST3 = ['to', 'up', 'see', 'go', 'is'];
 const LIST4 = ['it', 'we', 'like', 'and', 'mum'];
 const LIST5 = ['with', 'on', 'are', 'some', 'little'];
+const LIST6 = ['here', 'dad', 'went', 'this', 'for'];
 
 export const WORDS = new Map<string, string[]>([
   ['List 1', LIST1],
@@ -16,6 +17,7 @@ export const WORDS = new Map<string, string[]>([
   ['List 3', LIST3],
   ['List 4', LIST4],
   ['List 5', LIST5],
+  ['List 6', LIST6],
   ['Custom', []],
 ]);
 
