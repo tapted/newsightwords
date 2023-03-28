@@ -9,7 +9,7 @@ function unflip(tiles: EWord[]) {
 }
 
 @customElement('e-word')
-class EWord extends LitElement {
+export class EWord extends LitElement {
   @property({type: Boolean, reflect: true}) flip = false;
   @property({type: Boolean, reflect: true}) match = false;
 
@@ -41,6 +41,7 @@ class EWord extends LitElement {
       tile.match = true;
       tile.flip = false;
     }
+    this.dispatchEvent(new CustomEvent('got-match', {composed: true, bubbles: true}));
   }
 
   static get styles() {
