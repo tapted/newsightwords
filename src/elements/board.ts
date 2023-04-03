@@ -11,6 +11,7 @@ const LIST3 = ['to', 'up', 'see', 'go', 'is'];
 const LIST4 = ['it', 'we', 'like', 'and', 'mum'];
 const LIST5 = ['with', 'on', 'are', 'some', 'little'];
 const LIST6 = ['here', 'dad', 'went', 'this', 'for'];
+const LIST7 = ['you', 'was', 'has', 'said', 'want'];
 
 export const WORDS = new Map<string, string[]>([
   ['List 1', LIST1],
@@ -19,6 +20,7 @@ export const WORDS = new Map<string, string[]>([
   ['List 4', LIST4],
   ['List 5', LIST5],
   ['List 6', LIST6],
+  ['List 7', LIST7],
   ['Custom', []],
 ]);
 
@@ -256,7 +258,7 @@ export class Board extends LitElement {
         </div>
         <div class="middle">
           <button class="reset-button" @click=${this.resetGame}>
-            Congratulations! Play Again?
+            Kurt says, "Awesome Job!"<br>Play Again?
           </button>
         </div>
       </div>
