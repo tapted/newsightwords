@@ -7,7 +7,7 @@
     "strict": true,
     "module": "esnext",
     "target": "esnext",
-    "moduleResolution": "Node",
+    "moduleResolution": "node",
     "sourceMap": false,
     "inlineSourceMap": false,
     "experimentalDecorators": true,
