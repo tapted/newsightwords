@@ -1,7 +1,4 @@
-import {
-  NetworkFirst,
-  StaleWhileRevalidate,
-} from 'workbox-strategies';
+import {NetworkFirst, StaleWhileRevalidate} from 'workbox-strategies';
 
 // Used for filtering matches based on status code, header, or both
 import {CacheableResponsePlugin} from 'workbox-cacheable-response';

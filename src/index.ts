@@ -12,7 +12,7 @@ class EContainer extends LitElement {
   @query('e-board') board!: Board;
 
   static get styles() {
-    return css` 
+    return css`
       :host {
         padding: 0px;
         display: flex;
@@ -33,26 +33,26 @@ class EContainer extends LitElement {
 
   renderCheck(key: string) {
     return html`
-      <label>
-        <li>
-          <input
-              type="checkbox"
-              @change=${() => {
-    this.lists.set(key, !this.lists.get(key));
-    this.board.pickWords();
-  }}
-              ?checked=${this.lists.get(key)}>
-          ${key}
-        </li>
-      </label>`;
+    <label>
+      <li>
+        <input
+          type="checkbox"
+          @change=${() => {
+            this.lists.set(key, !this.lists.get(key));
+            this.board.pickWords();
+          }}
+          ?checked=${this.lists.get(key)} />
+        ${key}
+      </li>
+    </label>`;
   }
 
   override render() {
     return html`
-      <ul>  
+      <ul>
         ${[...WORDS.keys()].map((key) => this.renderCheck(key))}
       </ul>
-      <e-board .options=${this.lists}><e-board>
+      <e-board .options=${this.lists}></e-board>
     `;
   }
 }
@@ -64,7 +64,7 @@ async function initPages() {
   await container.updateComplete;
 }
 
-document.addEventListener('DOMContentLoaded', ()=> {
+document.addEventListener('DOMContentLoaded', () => {
   document.body.appendChild(container);
   firstFullLoad = initPages();
 });
