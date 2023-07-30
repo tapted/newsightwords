@@ -20,7 +20,7 @@ const LIST12 = ['of', 'one', 'where', 'very', 'them'];
 const LIST13 = ['will', 'they', 'what', 'our', 'good'];
 const LIST14 = ['were', 'he', 'there', 'big', 'as'];
 const LIST15 = ['had', 'get', 'if', 'people', 'from'];
-const LIST16 = ['can\'t', 'find', 'this', 'one'];
+const LIST16 = ['because', 'got', 'out', 'she', 'us'];
 const LIST17 = ['saw', 'would', 'about', 'came', 'not'];
 
 export const WORDS = new Map<string, string[]>([
