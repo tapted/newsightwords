@@ -72,7 +72,7 @@ export class EWord extends LitElement {
       }
       h2 {
         font-family: 'Edu NSW ACT Foundation', cursive;
-        font-size: calc(var(--tile-size, 180px) * 0.5);
+        font-size: calc(var(--tile-size, 180px) * 0.4);
         font-weight: unset;
         text-align: center;
       }
