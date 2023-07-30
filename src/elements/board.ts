@@ -19,6 +19,9 @@ const LIST11 = ['all', 'by', 'him', 'into', 'off'];
 const LIST12 = ['of', 'one', 'where', 'very', 'them'];
 const LIST13 = ['will', 'they', 'what', 'our', 'good'];
 const LIST14 = ['were', 'he', 'there', 'big', 'as'];
+const LIST15 = ['had', 'get', 'if', 'people', 'from'];
+const LIST16 = ['can\'t', 'find', 'this', 'one'];
+const LIST17 = ['saw', 'would', 'about', 'came', 'not'];
 
 export const WORDS = new Map<string, string[]>([
   ['List 1', LIST1],
@@ -35,6 +38,9 @@ export const WORDS = new Map<string, string[]>([
   ['List 12', LIST12],
   ['List 13', LIST13],
   ['List 14', LIST14],
+  ['List 15', LIST15],
+  ['List 16', LIST16],
+  ['List 17', LIST17],
   ['Custom', []],
 ]);
 
